@@ -120,6 +120,7 @@ function averageWordLength(wordsArr) {
 // Bonus - Iteration #4.1
 
 // why let average works but let sum must be let sum = 0?
+// SOLUTION: let sum is undefined, not a number
 function avg(arr) {
   let average;
   if (arr.length > 0) {
@@ -183,6 +184,7 @@ const wordsFind = [
 // before was:
 // function doesWordExist(word, wordsArr)
 // did not work. was it bc of lab instructions?
+//  SOLUTION: It was the tests
 
 function doesWordExist(wordsArr, word) {
   if (wordsArr.length > 0) {
@@ -307,8 +309,54 @@ function greatestProduct(matrix) {
   // running columns:
   // target array values -> inner array length -> for each
   // loop trough arrays -> each loop stops after 16
-  // idea: 1 1, 1 2, 1 3, 1 4, etc
+  // idea: 0 0, 0 1, 0 2, 0 3, etc
+  // i only iterates once j === 3
   // let columnMultiplication = matrix[j] *
+  let j = 0;
+  for (let i = 0; j === matrix[i].length - 1 && i < matrix.length - 3; i++) {
+    for (j; j < matrix.length; j++) {
+      let columnMultiplication =
+        matrix[i][j] * matrix[i + 1][j] * matrix[i + 2][j] * matrix[i + 3][j];
+      if (columnMultiplication > product) {
+        product = columnMultiplication;
+      }
+    }
+  }
+
+  return product;
+}
+
+// Bonus - Iteration #8.2: Product of diagonals
+function greatestProductOfDiagonals(matrix) {
+  let product = 0;
+
+  let j = 0;
+
+  for (let i = 0; j < matrix.length - 3 && i < matrix.length - 3; i++) {
+    for (j; j < matrix.length - 3; j++) {
+      let leftToRight =
+        matrix[i][j] *
+        matrix[i + 1][j + 1] *
+        matrix[i + 2][j + 2] *
+        matrix[i + 3][j + 3];
+      if (leftToRight > product) {
+        product = leftToRight;
+      }
+    }
+  }
+  j = matrix.length - 1;
+  for (let i = 0; j === 4 && i < matrix.length - 3; i++) {
+    for (j; j > 3; j--) {
+      let rightToLeft =
+        matrix[i][j] *
+        matrix[i + 1][j - 1] *
+        matrix[i + 2][j - 2] *
+        matrix[i + 3][j - 3];
+      if (rightToLeft > product) {
+        product = rightToLeft;
+      }
+    }
+  }
 
   return product;
 }
